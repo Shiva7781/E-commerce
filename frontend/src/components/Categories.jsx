@@ -9,13 +9,24 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
+const Title = styled.h1`
+  display: grid;
+  place-items: center;
+  height: 10vh;
+  background-color: cyan;
+`;
+
 const Categories = () => {
   return (
-    <Container>
-      {categories.map((item, i) => {
-        return <CategoryItem key={i} item={item} />;
-      })}
-    </Container>
+    <>
+      <Title> POPULAR CATEGORIES </Title>
+
+      <Container>
+        {categories.map((item, i) => {
+          return <CategoryItem key={i} item={item} />;
+        })}
+      </Container>
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ export const sliderItems = [
   {
     id: 3,
     img: "https://rukminim1.flixcart.com/image/832/832/ktbu6q80/ethnic-set/u/t/f/xxl-316k713-29tk113-saara-original-imag6p94dz3z4gfm.jpeg?q=70",
-    title: "LOUNGEWEAR LOVE",
+    title: "INDIAN LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
   },
@@ -52,37 +52,38 @@ export const categories = [
 export const popularProducts = [
   {
     id: 1,
-    img: "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
+    img: "https://www.pngarts.com/files/1/T-Shirt-PNG-Background-Image.png",
   },
   {
     id: 2,
-    //
-    img: "https://cdn.shopify.com/s/files/1/0101/4832/products/Angela_Natural_Tee.png?v=1606780388",
+    img: "https://www.pngarts.com/files/1/Summer-Clothes-For-Women-PNG-Image-Background.png",
   },
   {
     id: 3,
-    img: "https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
+    img: "https://www.pngarts.com/files/1/Summer-Clothes-For-Women-PNG-High-Quality-Image.png",
   },
   {
     id: 4,
-    //
-    img: "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
+    img: "https://www.pngarts.com/files/17/Halloween-T-Shirt-PNG-Pic.png",
   },
   {
     id: 5,
-    img: "https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
+    img: "https://www.pngarts.com/files/2/Pink-Jacket-For-Women-PNG-Free-Download.png",
   },
   {
     id: 6,
-    img: "https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
+    img: "https://www.pngarts.com/files/1/Jacket-Transparent-Images.png",
   },
   {
     id: 7,
-    //
-    img: "https://www.vintageindustries.nl/download_front/qympzk1762/2217_Arrow_Jacket_Forest.png",
+    img: "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
   },
   {
     id: 8,
-    img: "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
+    img: "https://www.pngarts.com/files/2/Swag-Cap-Transparent-Image.png",
+  },
+  {
+    id: 9,
+    img: "https://www.pngarts.com/files/3/Blazer-For-Men-PNG-Pic.png",
   },
 ];

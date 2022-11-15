@@ -48,6 +48,8 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  display: grid;
+  place-items: center;
 `;
 
 const Image = styled.img`
@@ -120,3 +122,4 @@ const Slider = () => {
 export default Slider;
 
 // src="https://i.ibb.co/DG69bQ4/2.png"
+// src="https://www.pngarts.com/"
