@@ -5,7 +5,11 @@ import styled from "styled-components";
 
 // Styled components
 const Container = styled.div`
-  height: 60px;
+  height: 77px;
+  display: grid;
+  align-content: center;
+  /* background-color: cyan; */
+  background-color: #ff5500;
 `;
 
 const Wrapper = styled.div`
@@ -16,6 +20,8 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
+  letter-spacing: 1.23px;
+  font-weight: 678;
   flex: 1;
   display: flex;
   align-items: center;
@@ -30,12 +36,14 @@ const SearchContainer = styled.div`
   border: 0.7px solid lightgray;
   display: flex;
   align-items: center;
-  margin-left: 25px;
+  margin-left: 7px;
   padding: 5px;
+  background-color: white;
 `;
 
 const Input = styled.input`
   border: none;
+  outline: none;
 `;
 
 const Center = styled.div`
@@ -44,10 +52,13 @@ const Center = styled.div`
 `;
 
 const Logo = styled.h1`
-  font-weight: bold;
+  letter-spacing: 1.23px;
+  font-weight: 786;
 `;
 
 const Right = styled.div`
+  letter-spacing: 1.23px;
+  font-weight: 687;
   flex: 1;
   display: flex;
   align-items: center;
@@ -72,7 +83,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Shiva</Logo>
+          <Logo>SHIVA</Logo>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
