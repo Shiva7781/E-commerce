@@ -119,7 +119,7 @@ const Product = () => {
         <ImgContainer>
           <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"></Image>
         </ImgContainer>
-        <ImgContainer>
+        <InfoContainer>
           <Title>Denim Jumpsuit</Title>
           <Desc>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
@@ -152,7 +152,7 @@ const Product = () => {
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>
-        </ImgContainer>
+        </InfoContainer>
       </Wrapper>
       <Newsletter />
       <Footer />
