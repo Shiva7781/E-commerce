@@ -15,9 +15,7 @@ const Container = styled.div`
 
 const AnimationContainer = styled.span`
   height: 55px;
-  width: 700px;
   position: absolute;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,24 +26,24 @@ const AnimationContainer = styled.span`
 
   @keyframes AnnouncementMSG {
     from {
-      left: 100%;
+      left: 70%;
     }
     to {
-      left: -21%;
+      left: 0%;
     }
   }
 `;
 
 const Image = styled.img`
-  width: 66px;
+  width: fit-content;
   height: 51px;
   margin: auto;
 `;
 
 const Title = styled.h3`
+  display: block;
   margin: auto;
-  color: #ffffff;
-  /* color: #ffee00; */
+  color: black;
 `;
 
 const Announcement = () => {
@@ -53,7 +51,7 @@ const Announcement = () => {
     <Container>
       <AnimationContainer>
         <Image src="https://media.tenor.com/Nfb3OcvwVKgAAAAj/%E3%83%80%E3%83%B3%E3%82%B9-%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC.gif" />
-        <Title>Super Deal Live Now 33% Cut On Every Order Hurry Up!</Title>
+        <Title>Super Deal Live Now Hurry Up!</Title>
         <Image src="https://media.tenor.com/Nfb3OcvwVKgAAAAj/%E3%83%80%E3%83%B3%E3%82%B9-%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC.gif" />
       </AnimationContainer>
     </Container>
