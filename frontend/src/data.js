@@ -12,14 +12,15 @@ export const sliderItems = [
     img: "https://rukminim1.flixcart.com/image/832/832/j8t35ow0/sweatshirt/g/v/g/xl-me-3952-b-moda-elementi-original-imaeyqpzjrgzyf9w.jpeg?q=70",
     title: "AUTUMN COLLECTION",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "f5fafd",
+    bg: "fffeff",
   },
   {
     id: 3,
     img: "https://rukminim1.flixcart.com/image/832/832/ktbu6q80/ethnic-set/u/t/f/xxl-316k713-29tk113-saara-original-imag6p94dz3z4gfm.jpeg?q=70",
     title: "INDIAN LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "fcf1ed",
+    // bg: "fbf0f4",
+    bg: "576874",
   },
   {
     id: 4,
@@ -27,7 +28,8 @@ export const sliderItems = [
     img: "https://rukminim1.flixcart.com/image/832/832/l1dwknk0/dress/e/v/m/xl-318tk9004-selvia-original-imagcyvny7a8zcus.jpeg?q=70",
     title: "SUMMER SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "fbf0f4",
+    // bg: "fbf0f4",
+    bg: "aaaeb6",
   },
 ];
 

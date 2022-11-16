@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 55px;
@@ -11,6 +12,8 @@ const Container = styled.div`
   font-size: 18px;
   font-weight: 500;
   position: relative;
+
+  ${mobile({ height: "33px" })}
 `;
 
 const AnimationContainer = styled.span`
@@ -32,18 +35,24 @@ const AnimationContainer = styled.span`
       left: 0%;
     }
   }
+
+  ${mobile({ height: "33px" })}
 `;
 
 const Image = styled.img`
   width: fit-content;
   height: 51px;
   margin: auto;
+
+  ${mobile({ height: "33px" })}
 `;
 
 const Title = styled.h3`
   display: block;
   margin: auto;
   color: black;
+
+  ${mobile({ fontSize: "11px" })}
 `;
 
 const Announcement = () => {

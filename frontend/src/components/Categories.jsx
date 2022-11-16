@@ -4,7 +4,6 @@ import { categories } from "../data";
 import CategoryItem from "./CategoryItem";
 import { mobile } from "../responsive";
 
-
 const Container = styled.div`
   display: flex;
   padding: 20px;
@@ -18,6 +17,8 @@ const Title = styled.h1`
   place-items: center;
   height: 10vh;
   background-color: cyan;
+
+  ${mobile({ fontSize: "14px", height: "5vh", backgroundColor: "white" })}
 `;
 
 const Categories = () => {

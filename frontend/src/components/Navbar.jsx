@@ -9,7 +9,6 @@ const Container = styled.div`
   height: 77px;
   display: grid;
   align-content: center;
-  /* background-color: cyan; */
   background-color: #ff5500;
 
   ${mobile({ height: "50px" })}
@@ -33,14 +32,14 @@ const Left = styled.div`
 `;
 
 const Language = styled.span`
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
 
   ${mobile({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
-  width: 83%;
+  width: 73%;
   border: 0.7px solid lightgray;
   display: flex;
   align-items: center;
@@ -53,7 +52,7 @@ const Input = styled.input`
   width: 100%;
   border: none;
   outline: none;
-  font-size: 21px;
+  font-size: 18px;
 
   ${mobile({ width: "50px" })}
 `;
@@ -82,7 +81,7 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled.div`
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
   margin-left: 25px;
 
@@ -97,7 +96,7 @@ const Navbar = () => {
           <Language>EN</Language>
           <SearchContainer>
             <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: "25" }} />
+            <Search style={{ color: "gray", fontSize: "21" }} />
           </SearchContainer>
         </Left>
         <Center>

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import Product from "./Product";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   padding: 20px;
@@ -15,6 +16,8 @@ const Title = styled.h1`
   place-items: center;
   height: 10vh;
   background-color: cyan;
+
+  ${mobile({ fontSize: "14px", height: "5vh", backgroundColor: "white" })}
 `;
 
 const Products = () => {

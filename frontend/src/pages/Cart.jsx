@@ -41,6 +41,8 @@ const TopTexts = styled.div`
 `;
 
 const TopText = styled.span`
+  padding: 11px;
+  font-weight: 579;
   text-decoration: underline;
   cursor: pointer;
   margin: 0 11px;
@@ -120,8 +122,8 @@ const ProductAmount = styled.div`
 `;
 
 const ProductPrice = styled.div`
-  font-size: 3px;
-  font-weight: 200;
+  font-size: 30px;
+  font-weight: 333;
 
   ${mobile({ marginBottom: "20px" })}
 `;
@@ -137,7 +139,6 @@ const Summary = styled.div`
   border: 1px solid lightgray;
   border-radius: 11px;
   padding: 25px;
-  height: fit-content;
 `;
 
 const SummaryTitle = styled.h1`
