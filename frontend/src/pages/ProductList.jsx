@@ -11,6 +11,11 @@ const Container = styled.div``;
 
 const Title = styled.h1`
   margin: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${mobile({ fontSize: "18px" })}
 `;
 
 const FilterContainer = styled.div`
@@ -46,7 +51,7 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>DRESSES</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>

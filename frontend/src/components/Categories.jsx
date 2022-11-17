@@ -18,7 +18,7 @@ const Title = styled.h1`
   height: 10vh;
   background-color: cyan;
 
-  ${mobile({ fontSize: "14px", height: "5vh", backgroundColor: "white" })}
+  ${mobile({ fontSize: "18px", height: "5vh", backgroundColor: "white" })}
 `;
 
 const Categories = () => {
