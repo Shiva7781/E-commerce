@@ -6,11 +6,11 @@ const UserSchema = new mongoose.Schema(
 
     // lname: { type: String, require: true },
 
+    mobile: { type: Number, required: true, unique: true },
+
     username: { type: String, require: true, unique: true },
 
     email: { type: String, require: true, unique: true },
-
-    // mobile: { type: Number, required: true, unique: true },
 
     password: { type: String, require: true },
 
