@@ -70,7 +70,7 @@ const Register = () => {
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
           <Input placeholder="Name" />
-          <Input placeholder="Last Name" />
+          <Input placeholder="Mobile Number" />
           <Input placeholder="Username" />
           <Input placeholder="Email" />
           <Input placeholder="Password" />

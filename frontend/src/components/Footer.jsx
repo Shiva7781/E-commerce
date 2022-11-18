@@ -8,7 +8,7 @@ import {
   Room,
   Twitter,
   YouTube,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
