@@ -27,15 +27,14 @@ router.post("/register", async (req, res) => {
     } else if (password !== cpassword) {
       return res.status(420).json({ error: "Password are not matching" });
     } else {
-      // creating a new mongoose doc from user data
+      // creating a new mongoose doc from user data also hashing the password
 
       const newUser = new User({
         name,
         mobile,
         username,
         email,
-        password,
-        cpassword,
+        password: bcrypt.hashSync(password, 11),
       });
 
       const savedUser = await newUser.save();
@@ -72,7 +71,7 @@ router.post("/login", async (req, res) => {
     );
 
     // sending JWT with user data except password
-    const { password, cpassword, ...others } = user._doc;
+    const { password, ...others } = user._doc;
     res.status(200).json({ accessToken, ...others });
   } catch (err) {
     res.status(500).json(err);
