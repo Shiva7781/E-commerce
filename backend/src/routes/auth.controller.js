@@ -1,26 +1,81 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-// Register
+// REGISTER
 router.post("/register", async (req, res) => {
-  // validate request
-  if (!req.body) {
-    // return res.status(400).send({ message: "Input field can not be empty!" });
-    return res.status(400).json({ message: "Input field can not be empty!" });
+  // Validate request
+
+  const { name, mobile, username, email, password, cpassword } = req.body;
+
+  if (!name || !mobile || !username || !email || !password || !cpassword) {
+    return res.status(420).json({ message: "Input field can not be empty!" });
   }
 
-  const newUser = new User({
-    mobile: req.body.mobile,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  });
-
   try {
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    const mobileExist = await User.findOne({ mobile: mobile });
+    const usernameExist = await User.findOne({ username: username });
+    const emailExist = await User.findOne({ email: email });
+
+    if (mobileExist) {
+      return res.status(420).json({ error: "Mobile number already exist" });
+    } else if (usernameExist) {
+      return res.status(420).json({ error: "Username already exist" });
+    } else if (emailExist) {
+      return res.status(420).json({ error: "Email already exist" });
+    } else if (password !== cpassword) {
+      return res.status(420).json({ error: "Password are not matching" });
+    } else {
+      // creating a new mongoose doc from user data
+
+      const newUser = new User({
+        name,
+        mobile,
+        username,
+        email,
+        password,
+        cpassword,
+      });
+
+      const savedUser = await newUser.save();
+
+      res.status(201).json(savedUser);
+    }
   } catch (err) {
     res.status(500).json(err.message);
+  }
+});
+
+// LOGIN
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return res.status(401).json("User does not exist");
+
+    // checking user password with hashed password stored in the database
+    const validPassword = bcrypt.compareSync(req.body.password, user.password);
+    // console.log(validPassword);
+
+    if (!validPassword) return res.status(401).json("Wrong Username/Password");
+
+    // sending user data
+    // res.status(200).json(user);
+
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "3d" }
+    );
+
+    // sending JWT with user data except password
+    const { password, cpassword, ...others } = user._doc;
+    res.status(200).json({ accessToken, ...others });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

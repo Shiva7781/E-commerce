@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
   {
-    // fname: { type: String, require: true },
-
-    // lname: { type: String, require: true },
+    name: { type: String, require: true },
 
     mobile: { type: Number, required: true, unique: true },
 
@@ -14,10 +13,25 @@ const UserSchema = new mongoose.Schema(
 
     password: { type: String, require: true },
 
+    cpassword: { type: String, require: true },
+
     isAdmin: { type: Boolean, default: false },
   },
 
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
+
+// Here hashing the password
+UserSchema.pre("save", async function (next) {
+  try {
+    const hash = bcrypt.hashSync(this.password, 10);
+    const chash = bcrypt.hashSync(this.cpassword, 10);
+    this.password = hash;
+    this.cpassword = chash;
+    return next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = mongoose.model("User", UserSchema);
