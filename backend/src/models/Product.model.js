@@ -8,7 +8,7 @@ const ProductSchema = new mongoose.Schema(
 
     img: { type: String, require: true },
 
-    categorie: { type: Array },
+    categories: { type: Array },
 
     size: { type: String },
 
@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema(
     price: { type: String, require: true },
   },
 
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model("Product", ProductSchema);

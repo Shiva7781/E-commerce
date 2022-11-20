@@ -17,11 +17,11 @@ const OrderSchema = new mongoose.Schema(
     ],
 
     amount: { type: Number, require: true },
-    address: { typeof: Object, require: true },
+    address: { type: Object, require: true },
     status: { type: String, default: "pending" },
   },
 
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model("Order", OrderSchema);
