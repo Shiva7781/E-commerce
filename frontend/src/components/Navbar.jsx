@@ -3,6 +3,7 @@ import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 // Styled components
 const Container = styled.div`
@@ -100,16 +101,26 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>SHIVA</Logo>
+          <Link to="/">
+            <Logo>SHIVA</Logo>
+          </Link>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge overlap="rectangular" badgeContent={3} color="primary">
-              <ShoppingCartOutlined style={{ width: "33", height: "33" }} />
-            </Badge>
-          </MenuItem>
+          <Link to="/register">
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
+
+          <Link to="/login">
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
+
+          <Link to="/cart">
+            <MenuItem>
+              <Badge overlap="rectangular" badgeContent={3} color="primary">
+                <ShoppingCartOutlined style={{ width: "33", height: "33" }} />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>

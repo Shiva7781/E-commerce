@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -6,6 +6,7 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -47,15 +48,30 @@ const Seletect = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  // console.log("location:", location.pathname.split("/")[2]);
+  const cat = location.pathname.split("/")[2];
+
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("Newest");
+  // console.log("filters:", filters);
+
+  const handleFilters = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setFilters({ ...filters, [name]: value });
+  };
+
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>DRESSES</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Seletect>
+          <Seletect name="color" onChange={handleFilters}>
             <Option defaultValue="">Color</Option>
             <Option>White</Option>
             <Option>Black</Option>
@@ -64,7 +80,7 @@ const ProductList = () => {
             <Option>Yellow</Option>
             <Option>Green</Option>
           </Seletect>
-          <Seletect>
+          <Seletect name="size" onChange={handleFilters}>
             <Option defaultValue="">Size</Option>
             <Option>XS</Option>
             <Option>S</Option>
@@ -75,14 +91,14 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Seletect>
+          <Seletect onChange={(e) => setSort(e.target.value)}>
             <Option defaultValue="Newest">Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="desc">Price (desc)</Option>
           </Seletect>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -6,6 +6,8 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 
@@ -83,6 +85,7 @@ const FilterColor = styled.div`
 const FilterSize = styled.select`
   margin-left: 7px;
   padding: 5px;
+  cursor: pointer;
 `;
 
 const FilterSizeOption = styled.option``;
@@ -103,10 +106,11 @@ const AmountContainer = styled.div`
 `;
 
 const Amount = styled.span`
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid teal;
+  width: 37px;
+  height: 37px;
+  font-size: 18px;
+  border-radius: 1.23px;
+  border: 1px solid gray;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,8 +119,9 @@ const Amount = styled.span`
 
 const Button = styled.button`
   padding: 15px;
-  border: 2px solid teal;
+  border: 3px solid teal;
   background-color: white;
+  border-radius: 7px;
   cursor: pointer;
   font-weight: 500;
   &:hover {
@@ -125,46 +130,110 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  // console.log("location:", location.pathname.split("/")[2]);
+  const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get(`/products/find/${id}`);
+
+        setProduct(res.data);
+      } catch (err) {
+        console.log("err:", err);
+      }
+    };
+
+    getProduct();
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if (type === "dec" && quantity > 1) {
+      setQuantity(quantity - 1);
+    } else if (type === "inc") {
+      setQuantity(quantity + 1);
+    }
+  };
+
+
+  const handleAddToCart = ()=>{
+    
+  }
+
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"></Image>
+          {/* <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"></Image> */}
+          <Image src={product.img}></Image>
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-            tempore itaque consequatur sed eaque iure velit, consectetur quod !
-          </Desc>
-          <Price> ₹ 777</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc} </Desc>
+          <Price>₹ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+
+              {product.color?.map((col, i) => (
+                <FilterColor
+                  key={i}
+                  color={col}
+                  onClick={() => setColor(col)}
+                />
+              ))}
             </Filter>
+
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size?.map((siz, i) => (
+                  <FilterSizeOption key={i}>{siz} </FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Add />
-              <Amount>1</Amount>
-              <Remove />
+              <Remove
+                onClick={() => handleQuantity("dec")}
+                style={{
+                  cursor: "pointer",
+                  width: 30,
+                  height: 30,
+                  borderRadius: 11,
+                  border: "1px solid teal",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 5px",
+                }}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                onClick={() => handleQuantity("inc")}
+                style={{
+                  cursor: "pointer",
+                  width: 30,
+                  height: 30,
+                  borderRadius: 11,
+                  border: "1px solid teal",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 5px",
+                }}
+              />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
