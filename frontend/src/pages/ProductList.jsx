@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+// import Navbar from "../components/Navbar";
+// import Announcement from "../components/Announcement";
 import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
@@ -53,8 +53,8 @@ const ProductList = () => {
   const cat = location.pathname.split("/")[2];
 
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("Newest");
   // console.log("filters:", filters);
+  const [sort, setSort] = useState("Newest");
 
   const handleFilters = (e) => {
     const name = e.target.name;
@@ -65,9 +65,9 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Navbar />
-      <Announcement />
-      <Title>{cat}</Title>
+      {/* <Navbar /> */}
+      {/* <Announcement /> */}
+      <Title>{cat.toUpperCase()}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>

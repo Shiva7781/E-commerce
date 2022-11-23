@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+// import Navbar from "../components/Navbar";
+// import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { userRequest } from "../requestMethods";
+import { useNavigate } from "react-router-dom";
+
+const KEY = `pk_test_51M6Fh3SGPTOGS94jHlB8D3gpYwNrEBvQe9X0wCJrwyNg9Y9tjHod3dPQRVBBrqvDeYG1pfZibMdxDqpb5U7WBi8M00PsYgrPos`;
 
 const Container = styled.div``;
 
@@ -167,10 +173,38 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+    navigate("/success");
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        navigate("/success", {
+          stripeData: res.data,
+          products: cart,
+        });
+      } catch (err) {
+        console.log("err:", err);
+      }
+    };
+    stripeToken && makeRequest();
+
+    // eslint-disable-next-line
+  }, [stripeToken, cart.total, navigate]);
   return (
     <Container>
-      <Navbar />
-      <Announcement />
+      {/* <Navbar /> */}
+      {/* <Announcement /> */}
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
@@ -180,81 +214,108 @@ const Cart = () => {
             <TopText>Shopping Bag(3)</TopText>
             <TopText>Your Wishlist</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+
+          <StripeCheckout
+            name="Shiva Shop"
+            image="https://user-images.githubusercontent.com/97456472/202922290-bb86bdeb-692d-41dd-9bb5-72dc9005fcaf.png"
+            billingAddress
+            shippingAddress
+            description={`Your total is ₹ ${cart.total}`}
+            amount={cart.total * 0.0123}
+            token={onToken}
+            stripeKey={KEY}
+          >
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </StripeCheckout>
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 7894561230
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 33
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>3</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>₹ 1555</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product, i) => (
+              <Product key={i}>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Remove
+                      style={{
+                        cursor: "pointer",
+                        width: 28,
+                        height: 28,
+                        borderRadius: 11,
+                        border: "1px solid teal",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 5px",
+                      }}
+                    />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Add
+                      style={{
+                        cursor: "pointer",
+                        width: 28,
+                        height: 28,
+                        borderRadius: 11,
+                        border: "1px solid teal",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 5px",
+                      }}
+                    />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    ₹ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
+
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 7894561230
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>₹ 555</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ 2110</SummaryItemPrice>
+              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ 111</SummaryItemPrice>
+              <SummaryItemPrice>₹ 299</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>₹ -222</SummaryItemPrice>
+              <SummaryItemPrice>₹ -299</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>₹ 1999</SummaryItemPrice>
+              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name="Shiva Shop"
+              image="https://user-images.githubusercontent.com/97456472/202922290-bb86bdeb-692d-41dd-9bb5-72dc9005fcaf.png"
+              billingAddress
+              shippingAddress
+              description={`Your total is ₹ ${cart.total}`}
+              amount={cart.total * 0.0123}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>

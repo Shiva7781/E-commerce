@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { userRequest } from "../requestMethods";
 
 const Container = styled.div`
   width: 98.9vw;
@@ -64,22 +65,84 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [userData, setUserData] = useState({
+    name: "",
+    mobile: "",
+    username: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+
+  // console.log("userData:", userData);
+
+  const handleRegister = async () => {
+    try {
+      // console.log("userData:", userData);
+
+      const res = await userRequest.post("auth/register", userData);
+
+      console.log("res:", res);
+    } catch (err) {
+      alert(err.response.data.message);
+      console.log("err:", err);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUserData({ ...userData, [name]: value });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input placeholder="Name" />
-          <Input placeholder="Mobile Number" />
-          <Input placeholder="Username" />
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
-          <Input placeholder="Confirm Password" />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="Name"
+            name="name"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
+          <Input
+            placeholder="Mobile Number"
+            name="mobile"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
+          <Input
+            placeholder="Username"
+            name="username"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
+          <Input
+            placeholder="Email"
+            name="email"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
+          <Input
+            placeholder="Password"
+            name="password"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
+          <Input
+            placeholder="Confirm Password"
+            name="cpassword"
+            autoComplete="false"
+            onChange={handleSubmit}
+          />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleRegister}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

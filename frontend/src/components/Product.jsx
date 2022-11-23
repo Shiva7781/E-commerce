@@ -68,7 +68,7 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
-  const { img } = item;
+  const { img, _id } = item;
 
   return (
     <Container>
@@ -79,7 +79,7 @@ const Product = ({ item }) => {
           <ShoppingBasketOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item._id}`}>
+          <Link to={`/product/${_id}`}>
             <SearchOutlined />
           </Link>
         </Icon>

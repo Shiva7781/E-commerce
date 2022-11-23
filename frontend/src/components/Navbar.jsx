@@ -1,9 +1,10 @@
+import React from "react";
 import { Badge } from "@mui/material";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Styled components
 const Container = styled.div`
@@ -90,6 +91,12 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  // const cart = useSelector((state) => state.cart);
+  // console.log("cart:", cart);
+
+  const quantity = useSelector((state) => state.cart.quantity);
+  // console.log("quantity:", quantity);
+
   return (
     <Container>
       <Wrapper>
@@ -116,7 +123,11 @@ const Navbar = () => {
 
           <Link to="/cart">
             <MenuItem>
-              <Badge overlap="rectangular" badgeContent={3} color="primary">
+              <Badge
+                overlap="rectangular"
+                badgeContent={quantity}
+                color="primary"
+              >
                 <ShoppingCartOutlined style={{ width: "33", height: "33" }} />
               </Badge>
             </MenuItem>
