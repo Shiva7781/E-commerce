@@ -67,6 +67,9 @@ const Center = styled.div`
 const Logo = styled.h1`
   letter-spacing: 1.23px;
   font-weight: 786;
+  color: black;
+  text-decoration-line: none;
+  text-decoration: none;
 
   ${mobile({ fontSize: "24px" })}
 `;
@@ -86,6 +89,7 @@ const MenuItem = styled.div`
   font-size: 15px;
   cursor: pointer;
   margin-left: 25px;
+  color: black;
 
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
@@ -108,20 +112,20 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <Logo>SHIVA</Logo>
           </Link>
         </Center>
         <Right>
-          <Link to="/register">
+          <Link to="/register" style={{ textDecoration: "none" }}>
             <MenuItem>REGISTER</MenuItem>
           </Link>
 
-          <Link to="/login">
+          <Link to="/login" style={{ textDecoration: "none" }}>
             <MenuItem>SIGN IN</MenuItem>
           </Link>
 
-          <Link to="/cart">
+          <Link to="/cart" style={{ textDecoration: "none" }}>
             <MenuItem>
               <Badge
                 overlap="rectangular"
