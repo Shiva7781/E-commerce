@@ -35,6 +35,7 @@ router.post("/register", async (req, res) => {
         username,
         email,
         password: bcrypt.hashSync(password, 11),
+        cpassword: bcrypt.hashSync(cpassword, 11),
       });
 
       const savedUser = await newUser.save();
@@ -70,8 +71,8 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
 
-    // sending JWT with user data except password
-    const { password, ...others } = user._doc;
+    // sending JWT with user data except password and cpassword
+    const { password, cpassword, ...others } = user._doc;
     res.status(200).json({ accessToken, ...others });
   } catch (err) {
     res.status(500).json(err);
