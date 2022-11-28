@@ -166,6 +166,7 @@ const Product = () => {
 
   const handleAddToCart = () => {
     dispatch(addProduct({ ...product, quantity, color, size }));
+    alert("Item added to cart successfully");
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { userRequest } from "../requestMethods";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 98.9vw;
@@ -65,6 +66,8 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     name: "",
     mobile: "",
@@ -83,6 +86,10 @@ const Register = () => {
       const res = await userRequest.post("auth/register", userData);
 
       console.log("res:", res);
+
+      alert("Registration Successful");
+
+      navigate("/login");
     } catch (err) {
       alert(err.response.data.message);
       console.log("err:", err);

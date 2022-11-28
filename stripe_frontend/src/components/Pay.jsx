@@ -28,7 +28,7 @@ const Pay = () => {
   const makePayment = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:7781/api/checkout/payment",
+        "https://shiva-e-commerce.herokuapp.com/api/checkout/payment",
         {
           tokenId: stripeToken.id,
           amount: 778100,
