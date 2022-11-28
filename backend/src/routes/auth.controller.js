@@ -10,7 +10,7 @@ router.post("/register", async (req, res) => {
   const { name, mobile, username, email, password, cpassword } = req.body;
 
   if (!name || !mobile || !username || !email || !password || !cpassword) {
-    return res.status(420).json({ message: "Input field can not be empty!" });
+    return res.status(420).json({ error: "Input field can not be empty!" });
   }
 
   try {
