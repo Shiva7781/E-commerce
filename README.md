@@ -26,14 +26,14 @@
 
 <br>
 
-https://user-images.githubusercontent.com/97456472/204301994-10dc1187-a97c-4d8e-8470-a9a7a9a83a78.mp4
+![Shiva E-commerce-1](https://user-images.githubusercontent.com/97456472/204318001-5859236c-f421-4f8f-aa8b-574dcdcadf43.gif)
 
-https://user-images.githubusercontent.com/97456472/204302039-a054fd94-8b2b-4f43-ac39-b2c81f0b4e2e.gif
+![Shiva-E-commerce-2](https://user-images.githubusercontent.com/97456472/204318379-38df3adf-1841-4343-bd00-5fe3f40e0bd2.gif)
 
-https://user-images.githubusercontent.com/97456472/204302064-b697ad1f-afad-4d43-ac02-20a089d994c4.gif
+![Shiva-E-commerce-3](https://user-images.githubusercontent.com/97456472/204318526-71752b30-636d-4503-96c1-f7cd3dd76561.gif)
 
-https://user-images.githubusercontent.com/97456472/204302112-ce29f0f0-9f65-4ffd-bd16-ea50629e77cc.gif
+![Shiva-E-commerce-4](https://user-images.githubusercontent.com/97456472/204318749-36805550-1895-43da-9712-df7b5bba8dcd.gif)
 
-https://user-images.githubusercontent.com/97456472/204302176-3d465e06-0446-4eda-813f-d4ac05bdc576.gif
+![Shiva-E-commerce-5](https://user-images.githubusercontent.com/97456472/204318934-23e1d968-9896-4a86-b4db-1d5f708279a3.gif)
 
 <br>
