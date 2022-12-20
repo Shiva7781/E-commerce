@@ -33,8 +33,8 @@ const Products = ({ cat, filters, sort }) => {
       try {
         const res = await axios.get(
           cat
-            ? `https://shiva-e-commerce.herokuapp.com/api/products?category=${cat}`
-            : `https://shiva-e-commerce.herokuapp.com/api/products`
+            ? `https://shivashop.onrender.com/api/products?category=${cat}`
+            : `https://shivashop.onrender.com/api/products`
         );
         setProducts(res.data);
 

@@ -2,6 +2,8 @@
 
 ## Backend:- https://shiva-e-commerce.herokuapp.com/api/
 
+## Backend:- https://shivashop.onrender.com/api/
+
 ## Deplyment link to view (https://shiva7781e-commerce.netlify.app/)
 
 <br>
