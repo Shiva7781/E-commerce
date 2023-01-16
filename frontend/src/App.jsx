@@ -29,13 +29,13 @@ function App() {
         <Navbar />
         <Announcement />
         <Routes>
-          <Route
-            path="/"
-            element={!loggedIn ? <Navigate to="/register" /> : <Home />}
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/products/:category" element={<ProductList />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={!loggedIn ? <Navigate to="/register" /> : <Cart />}
+          />
           <Route path="/success" element={<Success />} />
           <Route
             path="/login"
