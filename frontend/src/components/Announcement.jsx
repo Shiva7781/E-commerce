@@ -11,9 +11,12 @@ const Container = styled.div`
   justify-content: center;
   font-size: 18px;
   font-weight: 500;
-  position: relative;
+  /* position: relative; */
+  position: sticky;
+  top: 77px;
+  z-index: 111;
 
-  ${mobile({ height: "33px" })}
+  ${mobile({ height: "33px", top: "50px" })}
 `;
 
 const AnimationContainer = styled.span`

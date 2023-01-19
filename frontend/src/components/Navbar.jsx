@@ -4,14 +4,18 @@ import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../redux/userRedux";
 
 // Styled components
 const Container = styled.div`
   height: 77px;
   display: grid;
   align-content: center;
-  background-color: #ff5500;
+  background-color: #c66622;
+  position: sticky;
+  top: 0;
+  z-index: 111;
 
   ${mobile({ height: "50px" })}
 `;
@@ -95,6 +99,16 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  const loggedIn = useSelector((state) => state.user.currentUser);
+  console.log("loggedIn:", loggedIn);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    window.localStorage.clear();
+  };
+
   // const cart = useSelector((state) => state.cart);
   // console.log("cart:", cart);
 
@@ -122,7 +136,11 @@ const Navbar = () => {
           </Link>
 
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <MenuItem>SIGN IN</MenuItem>
+            {loggedIn ? (
+              <MenuItem onClick={handleLogout}>SIGNOUT</MenuItem>
+            ) : (
+              <MenuItem>SIGNIN</MenuItem>
+            )}
           </Link>
 
           <Link to="/cart" style={{ textDecoration: "none" }}>
