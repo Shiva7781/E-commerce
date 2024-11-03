@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div style={{ marginTop: "30px" }}>
+    <>
       {/* <Navbar /> */}
       {/* <Announcement /> */}
       <Slider />
@@ -17,7 +17,7 @@ const Home = () => {
       <Products />
       <Newsletter />
       <Footer />
-    </div>
+    </>
   );
 };
 
