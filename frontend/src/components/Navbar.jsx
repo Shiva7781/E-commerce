@@ -131,9 +131,9 @@ const Navbar = () => {
           </Link>
         </Center>
         <Right>
-          <Link to="/register" style={{ textDecoration: "none" }}>
+          {!loggedIn && <Link to="/register" style={{ textDecoration: "none" }}>
             <MenuItem>REGISTER</MenuItem>
-          </Link>
+          </Link>}
 
           <Link to="/login" style={{ textDecoration: "none" }}>
             {loggedIn ? (

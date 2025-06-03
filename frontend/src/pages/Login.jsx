@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import { clearError } from "../redux/userRedux";
+import { Link as RouterLink } from "react-router-dom";
 
 const Container = styled.div`
   width: 98.9vw;
@@ -72,6 +74,14 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
+const StyledRouterLink = styled(RouterLink)`
+  margin: 5px 0px;
+  font-size: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: inherit; // use inherited text color
+`;
+
 const Error = styled.span`
   color: red;
 `;
@@ -81,6 +91,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(clearError());
+
+    // eslint-disable-next-line
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -106,7 +122,7 @@ const Login = () => {
           </Button>
           {error && <Error>Something went wrong...</Error>}
           <Link>FORGOT PASSWORD</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <StyledRouterLink to="/register">CREATE A NEW ACCOUNT</StyledRouterLink>
         </Form>
       </Wrapper>
     </Container>
