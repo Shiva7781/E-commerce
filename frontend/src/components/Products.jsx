@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Product from "./Product";
 import { mobile } from "../responsive";
 import axios from "axios";
+import { Audio } from 'react-loader-spinner'
 
 const Container = styled.div`
   padding: 20px;
@@ -21,9 +22,18 @@ const Title = styled.h1`
   ${mobile({ fontSize: "18px", height: "5vh", backgroundColor: "white" })}
 `;
 
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* or a fixed height like 200px */
+  width: 100%;
+`;
+
 const Products = ({ cat, filters, sort }) => {
   console.log("cat, filters, sort :", cat, filters, sort);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   // console.log("filteredProducts:", filteredProducts);
@@ -31,15 +41,18 @@ const Products = ({ cat, filters, sort }) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
+        setIsLoading(true);
         const res = await axios.get(
           cat
             ? `https://shivashop.onrender.com/api/products?category=${cat}`
             : `https://shivashop.onrender.com/api/products`
         );
         setProducts(res.data);
+        setIsLoading(false);
 
         // console.log("axios", res.data);
       } catch (err) {
+        setIsLoading(false);
         console.log("err:", err);
       }
     };
@@ -80,13 +93,15 @@ const Products = ({ cat, filters, sort }) => {
         {/* popularProducts */}
         {/* filteredProducts */}
 
-        {cat
-          ? filteredProducts.map((item) => (
-              <Product item={item} key={item._id} />
-            ))
-          : products
-              .slice(0, 9)
-              .map((item) => <Product item={item} key={item._id} />)}
+        {isLoading ? (
+          <LoaderWrapper>
+            <Audio height="80" width="80" radius="9" color="green" ariaLabel="loading" />
+          </LoaderWrapper>
+        ) : cat ? (
+          filteredProducts.map((item) => <Product item={item} key={item._id} />)
+        ) : (
+          products.slice(0, 9).map((item) => <Product item={item} key={item._id} />)
+        )}
       </Container>
     </>
   );
