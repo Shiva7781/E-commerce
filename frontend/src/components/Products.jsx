@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Product from "./Product";
 import { mobile } from "../responsive";
 import axios from "axios";
-import { Audio } from 'react-loader-spinner'
+import { Bars } from 'react-loader-spinner'
 
 const Container = styled.div`
   padding: 20px;
@@ -95,7 +95,13 @@ const Products = ({ cat, filters, sort }) => {
 
         {isLoading ? (
           <LoaderWrapper>
-            <Audio height="80" width="80" radius="9" color="green" ariaLabel="loading" />
+            <Bars
+              height="80"
+              width="80"
+              color="#4fa94d"
+              ariaLabel="bars-loading"
+              visible={true}
+            />
           </LoaderWrapper>
         ) : cat ? (
           filteredProducts.map((item) => <Product item={item} key={item._id} />)

@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import { Bars } from 'react-loader-spinner'
 
 const Container = styled.div``;
 
@@ -29,7 +30,6 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   width: 88%;
-  height: 90vh;
   object-fit: cover;
 
   ${mobile({ height: "40vh" })}
@@ -37,7 +37,7 @@ const Image = styled.img`
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 0px 50px;
+  padding: 50px;
 
   ${mobile({ padding: "10px" })}
 `;
@@ -131,11 +131,20 @@ const Button = styled.button`
   }
 `;
 
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* or a fixed height like 200px */
+  width: 100%;
+`;
+
 const Product = () => {
   const location = useLocation();
   // console.log("location:", location.pathname.split("/")[2]);
   const id = location.pathname.split("/")[2];
 
+  const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
@@ -145,10 +154,13 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
+        setIsLoading(true);
         const res = await publicRequest.get(`/products/find/${id}`);
 
         setProduct(res.data);
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.log("err:", err);
       }
     };
@@ -173,73 +185,81 @@ const Product = () => {
     <Container>
       {/* <Navbar /> */}
       {/* <Announcement /> */}
-      <Wrapper>
-        <ImgContainer>
-          {/* <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"></Image> */}
-          <Image src={product.img}></Image>
-        </ImgContainer>
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Desc>{product.desc} </Desc>
-          <Price>₹ {product.price}</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
+      {isLoading ? (
+        <LoaderWrapper>
+          <Bars
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="bars-loading"
+            visible={true}
+          />
+        </LoaderWrapper>
+      ) : (
+        <Wrapper>
+          <ImgContainer>
+            {/* <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"></Image> */}
+            <Image src={product.img}></Image>
+          </ImgContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Desc>{product.desc} </Desc>
+            <Price>₹ {product.price}</Price>
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Color</FilterTitle>
 
-              {product.color?.map((col, i) => (
-                <FilterColor
-                  key={i}
-                  color={col}
-                  onClick={() => setColor(col)}
-                />
-              ))}
-            </Filter>
-
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((siz, i) => (
-                  <FilterSizeOption key={i}>{siz} </FilterSizeOption>
+                {product.color?.map((col, i) => (
+                  <FilterColor key={i} color={col} onClick={() => setColor(col)} />
                 ))}
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove
-                onClick={() => handleQuantity("dec")}
-                style={{
-                  cursor: "pointer",
-                  width: 30,
-                  height: 30,
-                  borderRadius: 11,
-                  border: "1px solid teal",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 5px",
-                }}
-              />
-              <Amount>{quantity}</Amount>
-              <Add
-                onClick={() => handleQuantity("inc")}
-                style={{
-                  cursor: "pointer",
-                  width: 30,
-                  height: 30,
-                  borderRadius: 11,
-                  border: "1px solid teal",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 5px",
-                }}
-              />
-            </AmountContainer>
-            <Button onClick={handleAddToCart}>ADD TO CART</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
+              </Filter>
+
+              <Filter>
+                <FilterTitle>Size</FilterTitle>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {product.size?.map((siz, i) => (
+                    <FilterSizeOption key={i}>{siz} </FilterSizeOption>
+                  ))}
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove
+                  onClick={() => handleQuantity("dec")}
+                  style={{
+                    cursor: "pointer",
+                    width: 30,
+                    height: 30,
+                    borderRadius: 11,
+                    border: "1px solid teal",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 5px",
+                  }}
+                />
+                <Amount>{quantity}</Amount>
+                <Add
+                  onClick={() => handleQuantity("inc")}
+                  style={{
+                    cursor: "pointer",
+                    width: 30,
+                    height: 30,
+                    borderRadius: 11,
+                    border: "1px solid teal",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 5px",
+                  }}
+                />
+              </AmountContainer>
+              <Button onClick={handleAddToCart}>ADD TO CART</Button>
+            </AddContainer>
+          </InfoContainer>
+        </Wrapper>
+      )}
       <Newsletter />
       <Footer />
     </Container>
